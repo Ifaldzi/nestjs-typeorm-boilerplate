@@ -20,15 +20,13 @@ export class AuthService {
   public async register(data: RegisterDTO) {
     const user: User = this.mapper.map(data, RegisterDTO, User);
 
-    console.log(data, user);
-
     await this.userRepository.save(user);
   }
 
   public async login(data: LoginDto): Promise<LoginResponse> {
     const user = await this.userRepository.findOneBy({ email: data.email });
 
-    if (user && user.checkPassword(data.password)) {
+    if (user && (await user.checkPassword(data.password))) {
       const token = this.jwtService.sign({
         id: user.id,
       });

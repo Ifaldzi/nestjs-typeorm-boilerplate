@@ -12,9 +12,9 @@ export class AppConfigService {
     const entities = [__dirname + '/../modules/**/*.entity{.ts,.js}'];
 
     return {
-      type: 'mysql',
+      type: 'postgres',
       host: this.configService.get('DB_HOST') || 'localhost',
-      port: this.configService.get<number>('DB_PORT') || 3306,
+      port: this.configService.get<number>('DB_PORT') || 5432,
       username: this.configService.get('DB_USERNAME'),
       password: this.configService.get<string>('DB_PASSWORD'),
       database: this.configService.get('DB_NAME'),
